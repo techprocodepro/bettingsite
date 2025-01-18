@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import protocol from '../Assets/protocol.png'
-import { CountUp } from 'countup.js'
+import protocol from '../Assets/protocol.png';
+import { CountUp } from 'countup.js';
 
 const Wallet = () => {
-
-    const walletAmount = useSelector(state => state.walletAmount);
+    const walletAmount = useSelector((state) => state.walletAmount); // Redux wallet amount
     const previousAmount = useRef(walletAmount); // Store the previous wallet amount
 
     useEffect(() => {
@@ -30,8 +29,8 @@ const Wallet = () => {
     return (
         <>
             <div className="wallet">
-                <span id='walletAmount'>{displayAmount}</span>
-                <img src={protocol} alt="" style={{ height: "25px" }} />
+                <span id="walletAmount">{walletAmount}</span>
+                <img src={protocol} alt="" style={{ height: '25px' }} />
             </div>
         </>
     );
