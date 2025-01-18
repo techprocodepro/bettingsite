@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import protocol from '../Assets/protocol.png'
-import { CountUp } from 'countup.js'
+import {CountUp} from 'countup.js'
 
 const Wallet = () => {
 
     const walletAmount = useSelector(state => state.walletAmount);
     const [displayAmount, setDisplayAmount] = useState(walletAmount);
-    // let count;
-    // setDisplayAmount(prev => { count = prev })
+    let count = displayAmount;
 
     useEffect(() => {
         const countUp = new CountUp('count', walletAmount, {
-            duration: 1,
-            startVal: displayAmount,
+            duration:1,
+            startVal: count,
             useEasing: true,
         });
         countUp()
