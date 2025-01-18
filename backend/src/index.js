@@ -11,7 +11,7 @@ const userData = {
     userName: "manoj",
     fullName: "manoj kumar",
     history: [{ name: "crash", gameId: "1234", Time: "1230140125", put: 100, take: 50 }, { name: "roulette", gameId: "5678", time: "1240140125", put: 100, take: 50 }, { name: "dice", gameId: "9012", time: "1250140125", put: 100, take: 50 }],
-    walletAmount: 100,
+    walletAmount: 1000,
     isLoggedIn: true
 }
 
