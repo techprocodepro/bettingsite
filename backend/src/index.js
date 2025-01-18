@@ -19,7 +19,7 @@ const userData = {
 
 app.post('/loginAuth', (req, res) => {
     if (req.body.userName === "root" && req.body.password === "root") {
-       return res.status(200).json(userData)
+        return res.status(200).json(userData)
     } else {
         return res.status(401).json({ message: "Invalid username or password" });
     }
