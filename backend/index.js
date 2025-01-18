@@ -7,6 +7,10 @@ app.use(express.json());
 
 app.use(cors({ origin: '*' }));
 
+app.get('/', (req, res) => {
+  res.send('hello world')
+})
+
 const userData = {
     _id: "1234",
     userName: "manoj",
@@ -16,9 +20,6 @@ const userData = {
     isLoggedIn: true
 }
 
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
 
 app.post('/loginAuth', (req, res) => {
     if (req.body.userName === "root" && req.body.password === "root") {
@@ -37,3 +38,8 @@ app.use((req, res) => {
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
+
+
+
+
+
