@@ -19,7 +19,7 @@ const Home = () => {
     useEffect(() => {
         const login = async () => {
             try {
-                const response = await axios.post("http://localhost:3001/loginAuth", {
+                const response = await axios.post("https://bettingsite-six.vercel.app/loginAuth", {
                     userName: "root",
                     password: "root",
                 });
@@ -87,7 +87,7 @@ const Home = () => {
                         <div className='navbar-btn'>
                             <div className='arrow-down-empty'></div>About us<div className='arrow-down-empty'></div>
                         </div>
-                        <div style={{flex:1}}></div>
+                        <div style={{ flex: 1 }}></div>
                         <div className='navbar-btn' onClick={handleLogout}>
                             <div className='arrow-down-empty'></div>
                             {isLoggedIn ? "Logout" : "Login"}
