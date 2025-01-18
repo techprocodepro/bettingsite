@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import protocol from '../Assets/protocol.png'
+import { CountUp } from 'countup.js'
 
 const Wallet = () => {
 
     const walletAmount = useSelector(state => state.walletAmount);
-    const [displayAmount, setDisplayAmount] = useState(walletAmount);
+    const previousAmount = useRef(walletAmount); // Store the previous wallet amount
 
     useEffect(() => {
+        // Create a CountUp instance and animate from previousAmount to walletAmount
+        const countUp = new CountUp('walletAmount', walletAmount, {
+            duration: 1, // Animation duration
+            startVal: previousAmount.current, // Start from the previous wallet amount
+            useEasing: true, // Smooth easing effect
+            separator: ',', // Add commas for large numbers
+        });
 
-        if (displayAmount !== walletAmount) {
-            const interval = setInterval(() => {
-                setDisplayAmount(prevAmount => {
-                    if (prevAmount < walletAmount) {
-                        return prevAmount + 1;  // Increase the display amount when the wallet increases
-                    } else if (prevAmount > walletAmount) {
-                        return prevAmount - 1; // Decrease the display amount when the wallet decreases
-                    }
-                    clearInterval(interval);
-                    return prevAmount; // Stop when displayAmount reaches walletAmount
-                });
-            }, 1);
-
-            // Clear the interval when the component unmounts or walletAmount has finished animating
-            return () => clearInterval(interval);
+        if (!countUp.error) {
+            countUp.start(); // Start the animation
+        } else {
+            console.error(countUp.error);
         }
-    }, [walletAmount, displayAmount]);
+
+        // Update the previousAmount reference
+        previousAmount.current = walletAmount;
+    }, [walletAmount]); // Trigger animation whenever walletAmount changes
 
     return (
         <>
             <div className="wallet">
-                {displayAmount}
+                <span id='walletAmount'>{displayAmount}</span>
                 <img src={protocol} alt="" style={{ height: "25px" }} />
             </div>
         </>
