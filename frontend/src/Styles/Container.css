@@ -1,0 +1,72 @@
+.ad {
+  display: flex;
+  width: 49%;
+  height: 120px;
+  margin: 10px 5px;
+  background: linear-gradient(
+    133deg,
+    rgba(53, 68, 125, 1) 0%,
+    rgba(55, 78, 129, 1) 22%,
+    rgba(68, 137, 150, 1) 43%,
+    rgba(56, 84, 131, 1) 45%,
+    rgba(69, 140, 151, 1) 64%,
+    rgba(55, 78, 129, 1) 66%
+  );
+  /* background-color: rgba(53, 68, 125, 1); */
+  border-radius: 35px;
+  flex:1;
+}
+.nd{
+    background: linear-gradient(
+    133deg,
+    #d58711 0%,
+    #ffce00 22%,
+    #d58711 43%,
+    #ffce00 45%,
+    #d58711 64%,
+    #ffce00 66%
+  );
+}
+.games-container {
+  width: 90%;
+  margin: 10px auto;
+  /* border: 1px solid black; */
+}
+.ad-btn {
+  display: flex;
+  flex: 3;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* border: 1px solid black; */
+}
+.ad-img {
+  flex: 2;
+  /* border: 1px solid black; */
+  height: 100%;
+  border-radius: 20px;
+}
+
+.claim-btn1, .claim-btn2 {
+  position: relative;
+  padding: 3px 5px;
+  background: #fec195;
+  font-size: 17px;
+  font-weight: 500;
+  color: #181818;
+  border: 3px solid #fec195;
+  border-radius: 8px;
+  box-shadow: 0 0 0 #fec1958c;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+  margin-bottom: 10px
+}
+.claim-btn2{
+    background: #463e7a;
+    color: white;
+    border: 3px solid #463e7a;
+}
+
+button:hover {
+  box-shadow: 0 0 15px #fec1958c;
+}
