@@ -17,9 +17,8 @@ const userData = {
 }
 
 app.get('/', (req, res) => {
-        return res.status(200).json({messege : "hello world"})
+  res.send('hello world')
 })
-
 
 app.post('/loginAuth', (req, res) => {
     if (req.body.userName === "root" && req.body.password === "root") {
