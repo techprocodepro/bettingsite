@@ -1,0 +1,128 @@
+
+
+:root{
+  --dark-color:#090c19;
+  --medium-color:#191939;
+  --light-btn-color:#2c2852;
+  --dark-btn-color:#463e7a;
+}
+body{
+ background-color: var(--dark-color);
+}
+
+.home {
+  width: 100svw;
+  height: 100svh;
+  background-color: var(--medium-color);
+}
+.head {
+  width: 100svw;
+  height: 10svh;
+  background-color: var(--medium-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar {
+  width: 15svw;
+  height: 90svh;
+  background-color: var(--medium-color);
+}
+.navbar-btn-container {
+  width: 98%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height:92%;
+}
+.arrow-down-empty{
+  width:30px;
+  margin: 5px;
+}
+
+.navbar-btn {
+  display: flex;
+  width: 85%;
+  height: 40px;
+  border-radius: 15px;
+  margin: 4px;
+  background-color: var(--dark-btn-color);
+  justify-content: space-between;
+  align-items: center;
+  color: #f1f1f1;
+  font-weight: 600;
+  cursor: pointer;
+}
+.arrow-down {
+  width: 30px;
+  background-color: var(--light-btn-color);
+  color: white;
+  height: 30px;
+  border-radius: 50%;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 150ms;
+}
+.rotated {
+  width: 30px;
+  background-color: var(--light-btn-color);
+  color: white;
+  height: 30px;
+  border-radius: 50%;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(-180deg);
+  transition: 150ms;
+}
+.drop-down {
+  height: 0px;
+  transition: 200ms;
+  color: white;
+  /* display: none; */
+  overflow: hidden;
+  width: 70%;
+}
+.drop-down.clicked {
+  height: 160px;
+  width: 70%;
+  transition: 200ms;
+  /* display: block; */
+  overflow: hidden;
+}
+.dropdown-item {
+  height: 40px;
+  width: 95%;
+  background-color: var(--light-btn-color);
+  border-radius: 15px;
+  margin: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wallet {
+  display: flex;
+  height: 40px;
+  width: 100px;
+  background-color: var(--light-btn-color);
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: larger;
+  color: gold;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  padding: 0px 10px;
+}
+.container {
+  height: 90svh;
+  width: 60svw;
+  background-color: #0f0f0f;
+  border-radius: 20px;
+  padding: 20px;
+}
+

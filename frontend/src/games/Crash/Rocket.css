@@ -1,0 +1,362 @@
+.rocket {
+  position: absolute;
+  top: 5%;
+  width: 40px;
+  left: calc(50% - 20px);
+}
+
+.rocket .rocket-body {
+  width: 40px;
+  left: calc(50% - 25px);
+  animation: bounce 0.5s infinite;
+}
+
+.rocket .rocket-body .body {
+  background-color: #dadada;
+  height: 90px;
+  left: calc(50% - 25px);
+  border-top-right-radius: 50%;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 25%;
+  border-bottom-right-radius: 25%;
+  border-top: 2.5px solid #f5f5f5;
+}
+
+.rocket .rocket-body:before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 12px);
+  width: 24px;
+  height: 6.5px;
+  background-color: #554842;
+  bottom: -6.5px;
+  border-bottom-right-radius: 30%;
+  border-bottom-left-radius: 30%;
+}
+
+.rocket .window {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #a75248;
+  left: calc(50% - 12.5px);
+  top: 20px;
+  border: 2.5px solid #b4b2b2;
+}
+
+.rocket .fin {
+  position: absolute;
+  z-index: -100;
+  height: 27.5px;
+  width: 25px;
+  background-color: #a75248;
+}
+
+.rocket .fin-left {
+  left: -15px;
+  top: calc(100% - 27.5px);
+  border-top-left-radius: 40%;
+  border-bottom-left-radius: 10%;
+}
+
+.rocket .fin-right {
+  right: -15px;
+  top: calc(100% - 27.5px);
+  border-top-right-radius: 40%;
+  border-bottom-right-radius: 10%;
+}
+
+.rocket .exhaust-flame {
+  position: absolute;
+  top: 45%;
+  width: 14px;
+  background: linear-gradient(to bottom, transparent 10%, #f5f5f5 100%);
+  height: 75px;
+  left: calc(50% - 7px);
+  animation: exhaust 0.2s infinite;
+}
+
+.rocket .exhaust-fumes li {
+  width: 30px;
+  height: 30px;
+  background-color: #f5f5f5;
+  list-style: none;
+  position: absolute;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.rocket .exhaust-fumes li:first-child {
+  width: 100px;
+  height: 100px;
+  bottom: -150px;
+  animation: fumes 5s infinite;
+}
+
+.rocket .exhaust-fumes li:nth-child(2) {
+  width: 75px;
+  height: 75px;
+  left: -60px;
+  top: 130px;
+  animation: fumes 3.2s infinite;
+}
+
+.rocket .exhaust-fumes li:nth-child(3) {
+  width: 60px;
+  height: 60px;
+  left: -20px;
+  top: 165px;
+  animation: fumes 3s 1s infinite;
+}
+
+.rocket .exhaust-fumes li:nth-child(4) {
+  width: 50px;
+  height: 50px;
+  left: -85px;
+  animation: fumes 4s 2s infinite;
+  top: 190px;
+}
+
+.rocket .exhaust-fumes li:nth-child(5) {
+  width: 65px;
+  height: 65px;
+  left: -60px;
+  top: 175px;
+  animation: fumes 5s infinite;
+}
+
+.rocket .exhaust-fumes li:nth-child(6) {
+  width: 100px;
+  height: 100px;
+  left: -30px;
+  top: 140px;
+  animation: fumes2 10s infinite;
+}
+
+.rocket .exhaust-fumes li:nth-child(7) {
+  width: 50px;
+  height: 50px;
+  left: -50px;
+  top: 160px;
+}
+
+.rocket .exhaust-fumes li:nth-child(8) {
+  width: 55px;
+  height: 55px;
+  left: 35px;
+  top: 170px;
+}
+
+.rocket .exhaust-fumes li:nth-child(9) {
+  width: 45px;
+  height: 45px;
+  left: 100px;
+  top: 190px;
+  animation: fumes 20s infinite;
+}
+
+.star li {
+  list-style: none;
+  position: absolute;
+}
+
+.star li:before,
+.star li:after {
+  content: "";
+  position: absolute;
+  background-color: #f5f5f5;
+}
+
+.star li:before {
+  width: 5px;
+  height: 1px;
+  border-radius: 50%;
+}
+
+.star li:after {
+  height: 4px;
+  width: 1px;
+  left: 2px;
+  top: -1.5px;
+}
+
+.star li:first-child {
+  top: -15px;
+  left: -105px;
+  animation: twinkle 0.4s infinite;
+}
+
+.star li:nth-child(2) {
+  top: 0;
+  left: 30px;
+  animation: twinkle 0.5s infinite;
+}
+
+.star li:nth-child(2):before {
+  height: 0.5px;
+  width: 2.5px;
+}
+
+.star li:nth-child(2):after {
+  width: 0.5px;
+  height: 2.5px;
+  top: -1px;
+  left: 1px;
+}
+
+.star li:nth-child(3) {
+  left: 60px;
+  top: 110px;
+  animation: twinkle 1s infinite;
+}
+
+.star li:nth-child(4) {
+  left: -50px;
+  top: 100px;
+  animation: twinkle 0.5s ease infinite;
+}
+
+.star li:nth-child(5) {
+  left: 85px;
+  top: 50px;
+  animation: twinkle 0.4s ease infinite;
+}
+
+.star li:nth-child(6) {
+  top: 43.5px;
+  left: -39.5px;
+  animation: twinkle 0.2s infinite;
+}
+
+.star li:nth-child(6):before {
+  height: 0.5px;
+  width: 2.5px;
+}
+
+.star li:nth-child(6):after {
+  width: 0.5px;
+  height: 2.5px;
+  top: -1px;
+  left: 1px;
+}
+
+@keyframes fumes {
+  50% {
+    transform: scale(1.5);
+    background-color: transparent;
+  }
+
+  51% {
+    transform: scale(0.8);
+  }
+
+  100% {
+    background-color: #f5f5f5;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translate3d(0px, 0px, 0);
+  }
+
+  50% {
+    transform: translate3d(0px, -2px, 0);
+  }
+
+  100% {
+    transform: translate3d(0px, 0px, 0);
+  }
+}
+
+@keyframes exhaust {
+  0% {
+    background: linear-gradient(to bottom, transparent 10%, #f5f5f5 100%);
+  }
+
+  50% {
+    background: linear-gradient(to bottom, transparent 8%, #f5f5f5 100%);
+  }
+
+  75% {
+    background: linear-gradient(to bottom, transparent 12%, #f5f5f5 100%);
+  }
+}
+
+@keyframes fumes2 {
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes twinkle {
+  80% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+.blast-container {
+  position: absolute;
+  top: 15%;
+  width: 40px;
+  left: calc(50% - 20px);
+}
+
+.blast {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(
+    circle,
+    rgb(255, 179, 0),
+    rgb(255, 0, 0),
+    red,
+    transparent
+  );
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: blast 0.5s ease-out forwards;
+}
+
+@keyframes blast {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0.8;
+  }
+}
+
+.fumes {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  top: 70px;
+  left: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+  animation: fumes 0.7s ease-out forwards;
+}
+
+@keyframes fumes {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -150%) scale(3);
+    opacity: 0;
+  }
+}
