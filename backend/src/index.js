@@ -16,6 +16,9 @@ const userData = {
     isLoggedIn: true
 }
 
+app.get('/', (req, res) => {
+        return res.status(200).json({messege : "hello world"})
+})
 
 
 app.post('/loginAuth', (req, res) => {
