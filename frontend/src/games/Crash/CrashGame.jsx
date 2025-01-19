@@ -79,8 +79,8 @@ const CrashGame = () => {
             socket.emit('cashOut');
             socket.on('cashOutSuccess', (newWinnings) => {
                 setWinnings(newWinnings);
-                dispatch(addWalletAmount(newWinnings))
-                alert(`You cashed out! Winnings: ${newWinnings}`);
+                dispatch(addWalletAmount(~~newWinnings))
+                setMessage(`You cashed out! Winnings: ${~~newWinnings}`);
             });
         }
     };
