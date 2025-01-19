@@ -12,7 +12,15 @@ app.use(express.json());
 
 // Create HTTP and WebSocket server
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+    cors: {
+        origin: '*', // Replace '*' with your frontend domain in production, e.g., 'https://example.com'
+        methods: ['GET', 'POST'], // Allowed HTTP methods
+        allowedHeaders: ['Content-Type'], // Allowed custom headers
+        credentials: true // Allow cookies and credentials if needed
+    }
+});
+
 
 // Game state
 let gameState = {
