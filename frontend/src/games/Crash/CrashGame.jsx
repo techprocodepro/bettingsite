@@ -11,12 +11,14 @@ const CrashGame = () => {
 
     const dispatch = useDispatch();
     const walletAmount = useSelector(state => state.walletAmount)
+    
     // const [progress, setProgress] = useState(0);
     // const [isCrashed, setIsCrashed] = useState(false);
     // const [isBetStarted, setIsBetStarted] = useState(false)
     // const name = useSelector(state => state.userName)
     // var interval;
 
+    const [message, setMessage] = useState('')
     const [multiplier, setMultiplier] = useState(0);
     const [gameStatus, setGameStatus] = useState(1); // 1 = waiting, 2 = in-progress, 3 = crashed
     const [betAmount, setBetAmount] = useState(100);
@@ -54,21 +56,21 @@ const CrashGame = () => {
     }, []);
 
     const placeBet = () => {
-        if (betAmount !== 0) {
+        if (betAmount > 0 && !isNaN(betAmount) && /^[0-9]+(\.[0-9]+)?$/.test(betAmount)) {
             if (walletAmount >= betAmount) {
-                if (gameStatus === 1) {
+                if (gameStatus === 1 || gameStatus === 3) {
                     socket.emit('placeBet', betAmount);
                     dispatch(deductWalletAmount(betAmount));
-                    alert(`Bet of ${betAmount} placed!`);
+                    setMessage("bet placed succesfully")
                 } else {
-                    alert('place bet in next game')
+                    setMessage('place bet in next game')
                 }
             }
             else {
-                alert('insufficient wallet balance')
+                setMessage('insufficient wallet balance')
             }
         } else {
-            alert('enter valid Amount')
+            setMessage('enter valid Amount')
         }
     };
 
@@ -93,16 +95,17 @@ const CrashGame = () => {
 
                 <div className='bet-console' style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", backgroundColor: "#191939", borderRadius: "30px", margin: "10px 5px" }}>
 
-                    <input value={betAmount} onChange={(e) => setBetAmount(Number(e.target.value))} style={{ width: "80%", height: "5%", border: "2px solid gold", borderRadius: "5px", margin: "10px auto", backgroundColor: "#0f0f0f", color: "white" }} />
+                    <input type='number' min={0} value={betAmount} onChange={(e) => setBetAmount(Number(e.target.value))} style={{ width: "80%", height: "5%", border: "2px solid gold", borderRadius: "5px", margin: "10px auto", backgroundColor: "#0f0f0f", color: "white" }} />
                     <button onClick={placeBet} style={{ width: "80%", height: "10%", background: "", color: "black", borderRadius: "5px", border: "2px solid black" }}>
                         place bet
                     </button>
                     <div style={{ width: "80%", margin: "5px" }}></div>
                     <button onClick={cashOut} style={{ width: "80%", height: "10%", background: "", color: "black", borderRadius: "5px", border: "2px solid black" }}> Cash Out</button>
+                    <p style={{color:"orange"}}>{message}</p>
                 </div>
                 {/* ============================================================================================================ */}
 
-                <div className='game-console' style={{ flex: 2, position: "relative", backgroundImage: `url(${nightSky})`, backgroundPositionY: `${(multiplier * 100) + (-710)}px`, backgroundRepeat: "no-repeat", backgroundSize: "cover", borderRadius: "30px", margin: "10px 5px" }}>
+                <div className='game-console' style={{ flex: 2, position: "relative", backgroundImage: `url(${nightSky})`, backgroundPositionY: `${(multiplier * 60) + (-710)}px`, backgroundRepeat: "no-repeat", backgroundSize: "cover", borderRadius: "30px", margin: "10px 5px" }}>
                     <h1 style={{ color: "white", margin: "45px 0px 0px 25px" }}>$ {multiplier.toFixed(2)}X</h1>
                     <h1 style={{ color: "red", margin: "5px 0px 0px 25px" }}>{gameStatus}</h1>
                     <div style={{ border: "1px solid red", position: "absolute", bottom: `${Math.min((multiplier * 430) + 100, 300)}px`, right: "50%" }}>

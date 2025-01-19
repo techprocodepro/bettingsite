@@ -65,6 +65,7 @@ function startGame() {
             gameState.gameStatus = 3;
             clearInterval(interval);
             io.emit('gameCrashed', gameState.crashMultiplier);
+            io.emit('gameStatus',1)
             console.log(`Game crashed at multiplier: ${gameState.crashMultiplier}`);
             setTimeout(startGame, 5000); // Restart game after crash
         }
@@ -90,12 +91,12 @@ io.on('connection', (socket) => {
 
     // Handle player cashout
     socket.on('cashOut', () => {
-        const player = gameState.players.find(p => p.socketId === socket.id);
-        if (player) {
-            const winnings = player.betAmount * gameState.multiplier;
-            console.log(`Player ${socket.id} cashed out for ${winnings}`);
+        // const player = gameState.players.find(p => p.socketId === socket.id);
+        // if (player) {
+            const winnings = 100 * gameState.multiplier; // **fix later** make betAmount dynamic
+            // console.log(`Player ${socket.id} cashed out for ${winnings}`);
             socket.emit('cashOutSuccess', winnings);
-        }
+        // }
     });
 
     // Handle disconnect
