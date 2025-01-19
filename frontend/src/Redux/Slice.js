@@ -31,7 +31,7 @@ const Slice = createSlice({
             state.walletAmount = action.payload
         },
         deductWalletAmount: (state, action) => {
-            state.walletAmount = action.payload
+            state.walletAmount -= action.payload
         },
         fetchUserData: (state, action) => {
             return { ...state, ...action.payload }

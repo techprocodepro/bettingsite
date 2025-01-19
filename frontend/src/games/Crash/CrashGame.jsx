@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import Rocket from './Rocket'
 import { useDispatch, useSelector } from 'react-redux';
-import { deductWalletAmount, addWalletAmount } from '../../Redux/Slice';
+import { addWalletAmount } from '../../Redux/Slice';
 import nightSky from '../../Assets/7qJhD8bS.jpg'
 import io from 'socket.io-client'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 const socket = io('https://bettingsite-1.onrender.com');
 
 const CrashGame = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const walletAmount = useSelector(state => state.walletAmount)
+    const isLoggedIn = useSelector(state => state.isLoggedIn)
+    const userName = useSelector(state => state.userName)
+    const [error, setError] = useState('')
+
 
     // const [progress, setProgress] = useState(0);
     // const [isCrashed, setIsCrashed] = useState(false);
@@ -52,34 +59,70 @@ const CrashGame = () => {
         };
     }, []);
 
-    const placeBet = () => {
-        if (betAmount > 0 && !isNaN(betAmount) && /^[0-9]+(\.[0-9]+)?$/.test(betAmount)) {
-            if (walletAmount >= betAmount) {
-                if (gameStatus === 1 || gameStatus === 3) {
-                    socket.emit('placeBet', betAmount);
-                    dispatch(deductWalletAmount(betAmount));
-                    setMessage("bet placed succesfully")
-                } else {
-                    setMessage('place bet in next game')
+    const placeBet = async () => {
+        if (isLoggedIn) {
+
+            if (betAmount > 0 && !isNaN(betAmount) && /^[0-9]+(\.[0-9]+)?$/.test(betAmount)) {
+                if (walletAmount >= betAmount) {
+                    if (gameStatus === 1 || gameStatus === 3) {
+                        try {
+                            const response = await axios.post("https://bettingsite-1.onrender.com/deduct-wallet-amount", { userName, newAmount: betAmount });
+
+                            if (response.status === 200) {
+                                console.log("money deducted");
+                                dispatch(addWalletAmount(response.data.walletAmount));
+                            } else {
+                                setError("not deducted succesfully ");
+                            }
+                        } catch (err) {
+                            console.error("deduction failed:", err);
+                            setError(err.response?.data?.message || "An unexpected error occurred.");
+                        }
+                        setMessage("bet placed succesfully")
+                    } else {
+                        setMessage('place bet in next game')
+                    }
                 }
-            }
-            else {
-                setMessage('insufficient wallet balance')
+                else {
+                    setMessage('insufficient wallet balance')
+                }
+            } else {
+                setMessage('enter valid Amount')
             }
         } else {
-            setMessage('enter valid Amount')
+            alert('Please log in first to claim the reward.')
+            navigate('/login')
         }
     };
 
-    
-    const cashOut = () => {
+
+    const cashOut = async () => {
         if (gameStatus === 2) {
-            socket.emit('cashOut');
-            socket.on('cashOutSuccess', (newWinnings) => {
-                setWinnings(newWinnings);
-                dispatch(addWalletAmount(~~newWinnings))
-                setMessage(`You cashed out! Winnings: ${~~newWinnings}`);
-            });
+            // socket.emit('cashOut');
+            // socket.on('cashOutSuccess', (newWinnings) => {
+            //     setWinnings(newWinnings);
+            //     dispatch(addWalletAmount(~~newWinnings))
+            //     setMessage(`You cashed out! Winnings: ${~~newWinnings}`);
+            // });
+            const winAmount = betAmount * multiplier;
+            if (isLoggedIn) {
+                try {
+                    const response = await axios.post("https://bettingsite-1.onrender.com/add-wallet-amount", { userName, newAmount: ~~winAmount });
+
+                    if (response.status === 200) {
+                        console.log("money added");
+                        dispatch(addWalletAmount(response.data.walletAmount));
+                    } else {
+                        setError("not succesfully added");
+                    }
+                } catch (err) {
+                    console.error("claiming failed:", err);
+                    setError(err.response?.data?.message || "An unexpected error occurred.");
+                }
+            } else {
+                alert('Please log in first to claim the reward.')
+                navigate('/login')
+            }
         }
     };
 

@@ -149,6 +149,29 @@ app.post('/add-wallet-amount', async (req, res) => {
     }
 });
 
+app.post('/deduct-wallet-amount', async (req, res) => {
+    try {
+        const { userName, newAmount } = req.body;
+
+        const user = await User.findOne({username : userName});
+
+        if (!user) {
+            return res.status(404).json({ message: 'Invalid user' });
+        }
+
+        // Update the wallet amount
+        user.walletAmount -= newAmount;
+        await user.save(); // Save the updated user document
+
+        return res.status(200).json({
+            message: 'Wallet amount updated successfully',
+            walletAmount: user.walletAmount
+        });
+    } catch (err) {
+        console.error('Error updating wallet amount:', err);
+        return res.status(500).json({ message: 'Server error', error: err.message });
+    }
+});
 
 // Login Authentication
 app.post('/loginAuth', async (req, res) => {
