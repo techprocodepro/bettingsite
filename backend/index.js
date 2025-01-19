@@ -101,7 +101,7 @@ io.on('connection', (socket) => {
         // const player = gameState.players.find(p => p.socketId === socket.id);
         // if (player) {
             const winnings = 100 * gameState.multiplier; // **fix later** make betAmount dynamic
-            // console.log(`Player ${socket.id} cashed out for ${winnings}`);
+            console.log(`Player ${socket.id} cashed out for ${winnings}`);
             socket.emit('cashOutSuccess', winnings);
         // }
     });
