@@ -4,7 +4,7 @@ import { addWalletAmount, setRegister } from '../Redux/Slice';
 import snoopDog from '../Assets/snoop.png'
 import boxing from '../Assets/boxing.png'
 import adSnoopDog from '../Assets/hero.a6ed58a2957284063d4d.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import profile from '../Assets/profile.jpg'
 import GamesListContainer from './GamesListContainer';
 
@@ -14,6 +14,17 @@ const HomePage = () => {
 
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(state => state.isLoggedIn)
+    const userName = useSelector(state=> state.userName)
+    const navigate = useNavigate();
+
+    const handleClaimNow = () => {
+        if (isLoggedIn) {
+            dispatch(addWalletAmount(100));
+        } else {
+            alert('Please log in first to claim the reward.')
+            navigate('/login')
+        }
+    };
 
     return (
         <>
@@ -23,7 +34,7 @@ const HomePage = () => {
                     src={adSnoopDog}
                     alt=""
                 />
-                {isLoggedIn ? <div style={{ flex: "2", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}><div style={{ height: "100px", width: "100px", borderRadius: "60px", background: "grey" }}><img src={profile} style={{ height: "100px", width: "100px", borderRadius: "60px" }} /></div><h3 style={{ color: "gold" }}>Hi!! Manoj</h3></div> : <div style={{ flex: "2", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                {isLoggedIn ? <div style={{ flex: "2", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}><div style={{ height: "100px", width: "100px", borderRadius: "60px", background: "grey" }}><img src={profile} style={{ height: "100px", width: "100px", borderRadius: "60px" }} /></div><h3 style={{ color: "gold" }}>Hi!! {userName}</h3></div> : <div style={{ flex: "2", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                     <Link to="/login" onClick={() => { dispatch(setRegister(true)) }} style={{ width: "100px", height: "40px", backgroundColor: "gold", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", borderRadius: "5px", fontWeight: "700", color: "" }}>Register</Link>
                     <p style={{ color: "#8f8f8f" }}>------------ or ------------</p>
                     <Link to="/login" onClick={() => { dispatch(setRegister(false)) }} style={{ width: "100px", height: "40px", backgroundColor: "gold", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", borderRadius: "5px", fontWeight: "700", color: "" }}>login</Link>
@@ -40,7 +51,7 @@ const HomePage = () => {
                         </div>
                         <button
                             className="claim-btn1"
-                            onClick={() => dispatch(addWalletAmount(100))}
+                            onClick={handleClaimNow}
                         >
                             Claim Now
                         </button>
@@ -58,7 +69,7 @@ const HomePage = () => {
                         </div>
                         <button
                             className="claim-btn2"
-                            onClick={() => dispatch(addWalletAmount(100))}
+                            onClick={handleClaimNow}
                         >
                             Claim Now
                         </button>

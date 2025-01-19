@@ -4,13 +4,14 @@ import GamesDropDown from './GamesDropDown';
 import Wallet from './Wallet';
 import Container from './Container';
 import UserBetHistory from './UserBetHistory';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser, fetchUserData } from '../Redux/Slice';
 import axios from "axios"
 
 const Home = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [isGamesClicked, setIsGamesClicked] = useState(false);
     const [isHistoryClicked, setIsHistoryClicked] = useState(false);
     const session = localStorage.getItem("accessToken"); // fix later => use this to make api call to get user data
@@ -45,9 +46,13 @@ const Home = () => {
 
 
 
-    const handleLogout = () => {
-        localStorage.removeItem("accessToken");  // Remove token from localStorage
-        dispatch(logoutUser());  // Dispatch the logout action to Redux store
+    const handleLogoutOrLogin = () => {
+        if (isLoggedIn) {
+            localStorage.removeItem("accessToken");  // Remove token from localStorage
+            dispatch(logoutUser());  // Dispatch the logout action to Redux store
+        } else {
+            navigate('login')
+        }
     };
 
     return (
@@ -88,7 +93,7 @@ const Home = () => {
                             <div className='arrow-down-empty'></div>About us<div className='arrow-down-empty'></div>
                         </div>
                         <div style={{ flex: 1 }}></div>
-                        <div className='navbar-btn' onClick={handleLogout}>
+                        <div className='navbar-btn' onClick={handleLogoutOrLogin}>
                             <div className='arrow-down-empty'></div>
                             {isLoggedIn ? "Logout" : "Login"}
                             <div className='arrow-down-empty'></div>

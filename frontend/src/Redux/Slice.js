@@ -8,11 +8,12 @@ import { createSlice } from "@reduxjs/toolkit";
 //     walletAmount: 1000,
 // }
 const initialState = {
-    _id: "",
+    id: "",
     userName: "",
-    fullName: "",
-    history: [],
+    phno: "",
+    accessToken: "",
     walletAmount: 0,
+    history: [],
     isLoggedIn: false,
     isRegister: false,
 }
@@ -38,14 +39,14 @@ const Slice = createSlice({
         logoutUser: () => {
             return initialState
         },
-        setRegister: (state, action)=> {
+        setRegister: (state, action) => {
             state.isRegister = action.payload
         },
-        setLoggedIn: (state,action)=>{
+        setLoggedIn: (state, action) => {
             state.isLoggedIn = action.payload
         }
     },
 });
 
-export const { changeName, addWalletAmount, deductWalletAmount, fetchUserData, logoutUser,setRegister, setLoggedIn } = Slice.actions;
+export const { changeName, addWalletAmount, deductWalletAmount, fetchUserData, logoutUser, setRegister, setLoggedIn } = Slice.actions;
 export default Slice.reducer;

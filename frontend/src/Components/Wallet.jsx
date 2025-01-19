@@ -4,27 +4,27 @@ import protocol from '../Assets/protocol.png';
 import { CountUp } from 'countup.js';
 
 const Wallet = () => {
-    const walletAmount = useSelector((state) => state.walletAmount); // Redux wallet amount
-    const previousAmount = useRef(walletAmount); // Store the previous wallet amount
+    const isLoggedIn = useSelector(state=> state.isLoggedIn)
+    const walletAmount = useSelector((state) => state.walletAmount);
+    const previousAmount = useRef(walletAmount);
 
     useEffect(() => {
-        // Create a CountUp instance and animate from previousAmount to walletAmount
+        
         const countUp = new CountUp('walletAmount', walletAmount, {
-            duration: 1, // Animation duration
-            startVal: previousAmount.current, // Start from the previous wallet amount
-            useEasing: true, // Smooth easing effect
-            separator: ',', // Add commas for large numbers
+            duration: 1, 
+            startVal: previousAmount.current, 
+            useEasing: true, 
+            separator: ',',
         });
 
         if (!countUp.error) {
-            countUp.start(); // Start the animation
+            countUp.start(); 
         } else {
             console.error(countUp.error);
         }
 
-        // Update the previousAmount reference
         previousAmount.current = walletAmount;
-    }, [walletAmount]); // Trigger animation whenever walletAmount changes
+    }, [walletAmount]);
 
     return (
         <>

@@ -11,7 +11,7 @@ const CrashGame = () => {
 
     const dispatch = useDispatch();
     const walletAmount = useSelector(state => state.walletAmount)
-    
+
     // const [progress, setProgress] = useState(0);
     // const [isCrashed, setIsCrashed] = useState(false);
     // const [isBetStarted, setIsBetStarted] = useState(false)
@@ -28,13 +28,11 @@ const CrashGame = () => {
 
 
     useEffect(() => {
-        // Listen for multiplier updates
         socket.on('multiplierUpdate', (newMultiplier) => {
             setMultiplier(newMultiplier);
             console.log(newMultiplier, 'from socket multiplier')
         });
 
-        // Listen for game state updates
         socket.on('gameStatus', (gameStatus) => {
             setGameStatus(gameStatus);
             // setPlayers(gameState.players);
@@ -47,7 +45,6 @@ const CrashGame = () => {
             console.log(crashMultiplier, "from socket crash multiplier")
         });
 
-        // Cleanup on component unmount
         return () => {
             socket.off('gameCrashed');
             socket.off('multiplierUpdate');
@@ -74,6 +71,7 @@ const CrashGame = () => {
         }
     };
 
+    
     const cashOut = () => {
         if (gameStatus === 2) {
             socket.emit('cashOut');
@@ -101,13 +99,22 @@ const CrashGame = () => {
                     </button>
                     <div style={{ width: "80%", margin: "5px" }}></div>
                     <button onClick={cashOut} style={{ width: "80%", height: "10%", background: "", color: "black", borderRadius: "5px", border: "2px solid black" }}> Cash Out</button>
-                    <p style={{color:"orange"}}>{message}</p>
+                    <p style={{ color: "orange" }}>{message}</p>
                 </div>
                 {/* ============================================================================================================ */}
 
                 <div className='game-console' style={{ flex: 2, position: "relative", backgroundImage: `url(${nightSky})`, backgroundPositionY: `${(multiplier * 60) + (-710)}px`, backgroundRepeat: "no-repeat", backgroundSize: "cover", borderRadius: "30px", margin: "10px 5px" }}>
                     <h1 style={{ color: "white", margin: "45px 0px 0px 25px" }}>$ {multiplier.toFixed(2)}X</h1>
-                    <h1 style={{ color: "red", margin: "5px 0px 0px 25px" }}>{gameStatus}</h1>
+                    <h1 style={{ color: "red", margin: "5px 0px 0px 25px" }}>{(() => {
+                        switch (gameStatus) {
+                            case 1:
+                                return <p style={{ color: "white", fontSize: "18px" }}> "Place bets, the game starts in a few seconds."</p>;
+                            case 3:
+                                return "Crashed";
+                            default:
+                                return "";
+                        }
+                    })()}</h1>
                     <div style={{ border: "1px solid red", position: "absolute", bottom: `${Math.min((multiplier * 430) + 100, 300)}px`, right: "50%" }}>
                         <Rocket isCrashed={gameStatus === 3} isBetStarted={gameStatus === 2} />
                     </div>
@@ -120,6 +127,7 @@ const CrashGame = () => {
 }
 
 export default CrashGame
+
 // const PlaceBet = () => {
 
 //     if (isCrashed) {
