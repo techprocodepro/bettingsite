@@ -129,7 +129,6 @@ app.post('/add-wallet-amount', async (req, res) => {
     try {
         const { userName, newAmount } = req.body;
 
-        // Find the user by ID
         const user = await User.findOne({username : userName});
 
         if (!user) {
