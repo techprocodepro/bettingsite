@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import { fetchUserData } from "../Redux/Slice";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { setRegister } from "../Redux/Slice"
 import charles from '../Assets/charles.jpg'
 
 
 
 const LoginPage = () => {
-    const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
@@ -36,9 +35,10 @@ const LoginPage = () => {
             });
 
             if (response.status === 200) {
-                console.log("Login successful:", response.data);
-                dispatch(fetchUserData(response.data));
-                localStorage.setItem("accessToken", response.data._id);
+                console.log("Login successful:", response.data.user);
+                dispatch(fetchUserData(response.data.user));
+                localStorage.setItem("accessToken", response.data.user.accessToken);
+                console.log(response.data.user.accessToken, "from login page access token")
                 navigate("/home");
             } else {
                 setError("Login failed. Please try again.");
@@ -89,7 +89,6 @@ const LoginPage = () => {
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: 'center', height: "500px", flexDirection: "row-reverse", backgroundColor: "black", borderRadius: "20px" }}>
             <img style={{ flex: 1, height: "100%", borderRadius: "20px" }} src={charles} alt="" />
-            {console.log(isRegister)}
             {isRegister ?
                 <div style={containerStyle}>
                     <h4 style={{ margin: '10px' }}>Register your account</h4>

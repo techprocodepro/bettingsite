@@ -19,7 +19,9 @@ const HomePage = () => {
 
     const handleClaimNow = () => {
         if (isLoggedIn) {
+
             dispatch(addWalletAmount(100));
+
         } else {
             alert('Please log in first to claim the reward.')
             navigate('/login')

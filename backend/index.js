@@ -125,6 +125,31 @@ app.get('/', (req, res) => {
     res.send('Hello, world!');
 });
 
+app.post('/add-wallet-amount', async (req, res) => {
+    try {
+        const { id, newAmount } = req.body;
+
+        // Find the user by ID
+        const user = await User.findById(id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'Invalid user' });
+        }
+
+        // Update the wallet amount
+        user.walletAmount = newAmount;
+        await user.save(); // Save the updated user document
+
+        return res.status(200).json({
+            message: 'Wallet amount updated successfully',
+            walletAmount: user.walletAmount
+        });
+    } catch (err) {
+        console.error('Error updating wallet amount:', err);
+        return res.status(500).json({ message: 'Server error', error: err.message });
+    }
+});
+
 
 // Login Authentication
 app.post('/loginAuth', async (req, res) => {
@@ -148,7 +173,7 @@ app.post('/loginAuth', async (req, res) => {
                 accessToken: user.accessToken,
                 walletAmount: user.walletAmount,
                 history: user.history,
-                isLoggedIn:true,
+                isLoggedIn: true,
                 isRegister: false,
             }
         });
@@ -164,13 +189,13 @@ app.post("/register-user", async (req, res) => {
     try {
 
         const newUser = new User(req.body);
-        
+
         const response = await newUser.save();
 
         res.status(200).json({ message: "Details saved", user: response });
 
     } catch (err) {
-        
+
         res.status(500).json({ message: "Error saving details", error: err.message });
     }
 });

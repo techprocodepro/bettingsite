@@ -4,7 +4,6 @@ import protocol from '../Assets/protocol.png';
 import { CountUp } from 'countup.js';
 
 const Wallet = () => {
-    const isLoggedIn = useSelector(state=> state.isLoggedIn)
     const walletAmount = useSelector((state) => state.walletAmount);
     const previousAmount = useRef(walletAmount);
 
@@ -25,6 +24,7 @@ const Wallet = () => {
 
         previousAmount.current = walletAmount;
     }, [walletAmount]);
+    
 
     return (
         <>

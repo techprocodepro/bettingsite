@@ -4,7 +4,7 @@ import GamesDropDown from './GamesDropDown';
 import Wallet from './Wallet';
 import Container from './Container';
 import UserBetHistory from './UserBetHistory';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser, fetchUserData } from '../Redux/Slice';
 import axios from "axios"
@@ -21,14 +21,14 @@ const Home = () => {
         const login = async () => {
             try {
                 const response = await axios.post("https://bettingsite-1.onrender.com/loginAuth", {
-                    userName: "root",
-                    password: "root",
+                    userName: "groot",
+                    password: "groot",
                 });
 
                 if (response.status === 200) {
-                    console.log("Login successful:", response.data);
-                    dispatch(fetchUserData(response.data));
-                    localStorage.setItem("accessToken", response.data._id);
+                    console.log("Login successful:", response.data.user);
+                    dispatch(fetchUserData(response.data.user));
+                    localStorage.setItem("accessToken", response.data.user.accessToken);
                 } else {
                     console.log("Login failed. Please try again.");
                 }
@@ -41,7 +41,7 @@ const Home = () => {
             login();
         }
 
-    }, []);
+    });
 
 
 
