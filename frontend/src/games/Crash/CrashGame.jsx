@@ -29,18 +29,20 @@ const CrashGame = () => {
         // Listen for multiplier updates
         socket.on('multiplierUpdate', (newMultiplier) => {
             setMultiplier(newMultiplier);
-            console.log(newMultiplier, 'from socket')
+            console.log(newMultiplier, 'from socket multiplier')
         });
 
         // Listen for game state updates
-        socket.on('gameState', (gameState) => {
-            setGameStatus(gameState.gameStatus);
-            setPlayers(gameState.players);
+        socket.on('gameStatus', (gameStatus) => {
+            setGameStatus(gameStatus);
+            // setPlayers(gameState.players);
+            console.log(gameStatus, "from socket game status")
         });
 
         socket.on('gameCrashed', (crashMultiplier) => {
             setGameStatus('crashed');
             setCrashMultiplier(crashMultiplier);
+            console.log(crashMultiplier, "from socket crash multiplier")
         });
 
         // Cleanup on component unmount
@@ -49,7 +51,7 @@ const CrashGame = () => {
             socket.off('multiplierUpdate');
             socket.off('gameState');
         };
-    }, []);
+    }, [gameStatus]);
 
     const placeBet = () => {
         if (betAmount !== 0) {

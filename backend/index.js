@@ -25,43 +25,48 @@ const io = socketIo(server, {
 // Game state
 let gameState = {
     multiplier: 1.0,
-    gameStatus: 'waiting',
+    gameStatus: 1,     // 1 = waiting, 2 = in-progress, 3 = crashed
     crashMultiplier: null,
     players: []
 };
 
 // Function to generate a random crash multiplier
 function generateCrashMultiplier() {
-    return (Math.random() * (10 - 1.5) + 1.5).toFixed(2); // Between 1.5x and 10x
+    return (Math.random() * (5 - 0.5) + 0.5).toFixed(2); // Between 0.5x and 5x
 }
+
 
 // Game loop
 function startGame() {
     gameState = {
         ...gameState,
         multiplier: 1.0,
-        gameStatus: 'in-progress',
+        gameStatus: 2,
         crashMultiplier: generateCrashMultiplier(),
         players: []
     };
     console.log(`Game started. Crash multiplier: ${gameState.crashMultiplier}`);
 
     const interval = setInterval(() => {
-        if (gameState.gameStatus === 'crashed') {
+
+        if (gameState.gameStatus === 3) {
             clearInterval(interval);
-            setTimeout(startGame, 3000); // Restart game after crash
+            setTimeout(startGame, 7000); // Restart game after crash
             return;
         }
 
         gameState.multiplier += 0.01;
+
         io.emit('multiplierUpdate', gameState.multiplier);
 
+        io.emit('gameStatus',gameState.gameStatus);
+
         if (parseFloat(gameState.multiplier.toFixed(2)) >= parseFloat(gameState.crashMultiplier)) {
-            gameState.gameStatus = 'crashed';
+            gameState.gameStatus = 3;
             clearInterval(interval);
             io.emit('gameCrashed', gameState.crashMultiplier);
             console.log(`Game crashed at multiplier: ${gameState.crashMultiplier}`);
-            setTimeout(startGame, 3000); // Restart game after crash
+            setTimeout(startGame, 7000); // Restart game after crash
         }
     }, 100);
 }
