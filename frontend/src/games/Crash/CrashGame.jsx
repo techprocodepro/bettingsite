@@ -82,9 +82,9 @@ const CrashGame = () => {
     };
 
 
-    
-    
-    
+
+
+
     return (
         <div style={{ width: "100%", height: "100%", borderRadius: "30px", padding: "3px" }}>
             <div style={{ width: "100%", height: "70%", display: "flex", borderRadius: "30px", backgroundColor: "#463e7a", zIndex: "100" }}>
@@ -102,7 +102,7 @@ const CrashGame = () => {
 
                 <div className='game-console' style={{ flex: 2, position: "relative", backgroundImage: `url(${nightSky})`, backgroundPositionY: `${(multiplier * 25) + (-710)}px`, backgroundRepeat: "no-repeat", backgroundSize: "cover", borderRadius: "30px", margin: "10px 5px" }}>
                     <h1 style={{ color: "white", margin: "45px 0px 0px 25px" }}>$ {multiplier.toFixed(2)}X</h1>
-                    {(gameStatus === 'crashed') && <h1 style={{ color: "red", margin: "5px 0px 0px 25px" }}>Crashed</h1>}
+                    <h1 style={{ color: "red", margin: "5px 0px 0px 25px" }}>{gameStatus}</h1>
                     <div style={{ border: "1px solid red", position: "absolute", bottom: `${Math.min((multiplier * 130) + 100, 300)}px`, right: "50%" }}>
                         <Rocket isCrashed={gameStatus === 'crashed'} isBetStarted={gameStatus === 'in-progress'} />
                     </div>

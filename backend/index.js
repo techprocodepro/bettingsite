@@ -101,7 +101,7 @@ io.on('connection', (socket) => {
 });
 
 // Start the game loop
-setTimeout(startGame, 3000);
+setTimeout(startGame, 7000);
 
 // Routes
 app.get('/', (req, res) => {
