@@ -102,7 +102,7 @@ const CrashGame = () => {
                 </div>
                 {/* ============================================================================================================ */}
 
-                <div className='game-console' style={{ flex: 2, position: "relative", backgroundImage: `url(${nightSky})`, backgroundPositionY: `${(multiplier * 25) + (-710)}px`, backgroundRepeat: "no-repeat", backgroundSize: "cover", borderRadius: "30px", margin: "10px 5px" }}>
+                <div className='game-console' style={{ flex: 2, position: "relative", backgroundImage: `url(${nightSky})`, backgroundPositionY: `${(multiplier * 100) + (-710)}px`, backgroundRepeat: "no-repeat", backgroundSize: "cover", borderRadius: "30px", margin: "10px 5px" }}>
                     <h1 style={{ color: "white", margin: "45px 0px 0px 25px" }}>$ {multiplier.toFixed(2)}X</h1>
                     <h1 style={{ color: "red", margin: "5px 0px 0px 25px" }}>{gameStatus}</h1>
                     <div style={{ border: "1px solid red", position: "absolute", bottom: `${Math.min((multiplier * 430) + 100, 300)}px`, right: "50%" }}>

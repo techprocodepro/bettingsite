@@ -32,7 +32,7 @@ let gameState = {
 
 // Function to generate a random crash multiplier
 function generateCrashMultiplier() {
-    return (Math.random() * 5).toFixed(2); // Between 0.5x and 5x
+    return (Math.random() * 8).toFixed(2); // Between 0.5x and 5x
 }
 
 
@@ -55,7 +55,7 @@ function startGame() {
             return;
         }
 
-        gameState.multiplier += 0.01;
+        gameState.multiplier += 0.08;
 
         io.emit('multiplierUpdate', gameState.multiplier);
 
