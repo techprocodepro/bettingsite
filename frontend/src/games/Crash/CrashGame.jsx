@@ -18,7 +18,7 @@ const CrashGame = () => {
     // var interval;
 
     const [multiplier, setMultiplier] = useState(0);
-    const [gameStatus, setGameStatus] = useState('waiting');
+    const [gameStatus, setGameStatus] = useState(1); // 1 = waiting, 2 = in-progress, 3 = crashed
     const [betAmount, setBetAmount] = useState(100);
     const [players, setPlayers] = useState([]);
     const [winnings, setWinnings] = useState(null);
@@ -40,7 +40,7 @@ const CrashGame = () => {
         });
 
         socket.on('gameCrashed', (crashMultiplier) => {
-            setGameStatus('crashed');
+            setGameStatus(3);
             setCrashMultiplier(crashMultiplier);
             console.log(crashMultiplier, "from socket crash multiplier")
         });
@@ -51,12 +51,12 @@ const CrashGame = () => {
             socket.off('multiplierUpdate');
             socket.off('gameState');
         };
-    }, [gameStatus]);
+    }, []);
 
     const placeBet = () => {
         if (betAmount !== 0) {
             if (walletAmount >= betAmount) {
-                if (gameStatus === 'waiting') {
+                if (gameStatus === 1) {
                     socket.emit('placeBet', betAmount);
                     dispatch(deductWalletAmount(betAmount));
                     alert(`Bet of ${betAmount} placed!`);
@@ -73,7 +73,7 @@ const CrashGame = () => {
     };
 
     const cashOut = () => {
-        if (gameStatus === 'in-progress') {
+        if (gameStatus === 2) {
             socket.emit('cashOut');
             socket.on('cashOutSuccess', (newWinnings) => {
                 setWinnings(newWinnings);
@@ -105,8 +105,8 @@ const CrashGame = () => {
                 <div className='game-console' style={{ flex: 2, position: "relative", backgroundImage: `url(${nightSky})`, backgroundPositionY: `${(multiplier * 25) + (-710)}px`, backgroundRepeat: "no-repeat", backgroundSize: "cover", borderRadius: "30px", margin: "10px 5px" }}>
                     <h1 style={{ color: "white", margin: "45px 0px 0px 25px" }}>$ {multiplier.toFixed(2)}X</h1>
                     <h1 style={{ color: "red", margin: "5px 0px 0px 25px" }}>{gameStatus}</h1>
-                    <div style={{ border: "1px solid red", position: "absolute", bottom: `${Math.min((multiplier * 130) + 100, 300)}px`, right: "50%" }}>
-                        <Rocket isCrashed={gameStatus === 'crashed'} isBetStarted={gameStatus === 'in-progress'} />
+                    <div style={{ border: "1px solid red", position: "absolute", bottom: `${Math.min((multiplier * 430) + 100, 300)}px`, right: "50%" }}>
+                        <Rocket isCrashed={gameStatus === 3} isBetStarted={gameStatus === 2} />
                     </div>
                 </div>
 

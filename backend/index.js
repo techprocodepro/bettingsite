@@ -32,7 +32,7 @@ let gameState = {
 
 // Function to generate a random crash multiplier
 function generateCrashMultiplier() {
-    return (Math.random() * (5 - 0.5) + 0.5).toFixed(2); // Between 0.5x and 5x
+    return (Math.random() * 5).toFixed(2); // Between 0.5x and 5x
 }
 
 
@@ -51,7 +51,7 @@ function startGame() {
 
         if (gameState.gameStatus === 3) {
             clearInterval(interval);
-            setTimeout(startGame, 7000); // Restart game after crash
+            setTimeout(startGame, 5000); // Restart game after crash
             return;
         }
 
@@ -66,7 +66,7 @@ function startGame() {
             clearInterval(interval);
             io.emit('gameCrashed', gameState.crashMultiplier);
             console.log(`Game crashed at multiplier: ${gameState.crashMultiplier}`);
-            setTimeout(startGame, 7000); // Restart game after crash
+            setTimeout(startGame, 5000); // Restart game after crash
         }
     }, 100);
 }
@@ -106,7 +106,7 @@ io.on('connection', (socket) => {
 });
 
 // Start the game loop
-setTimeout(startGame, 7000);
+setTimeout(startGame, 5000);
 
 // Routes
 app.get('/', (req, res) => {
