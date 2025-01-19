@@ -68,9 +68,11 @@ function startGame() {
 
             setTimeout(() => {
                 gameState.gameStatus = 1;
+                gameState.multiplier = 0;
                 io.emit('gameStatus', gameState.gameStatus); // Reset to waiting status
+                io.emit('multiplierUpdate', gameState.multiplier)
             }, 1000);
-            
+
             console.log(`Game crashed at multiplier: ${gameState.crashMultiplier}`);
             setTimeout(startGame, 5000); // Restart game after crash
         }
