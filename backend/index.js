@@ -137,7 +137,7 @@ app.post('/add-wallet-amount', async (req, res) => {
         }
 
         // Update the wallet amount
-        user.walletAmount = newAmount;
+        user.walletAmount += newAmount;
         await user.save(); // Save the updated user document
 
         return res.status(200).json({

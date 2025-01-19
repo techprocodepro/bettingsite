@@ -7,6 +7,7 @@ import adSnoopDog from '../Assets/hero.a6ed58a2957284063d4d.jpg'
 import { Link, useNavigate } from 'react-router-dom';
 import profile from '../Assets/profile.jpg'
 import GamesListContainer from './GamesListContainer';
+import axios from 'axios'
 
 
 
@@ -14,14 +15,26 @@ const HomePage = () => {
 
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(state => state.isLoggedIn)
-    const userName = useSelector(state=> state.userName)
+    const id = useSelector(state => state.id)
+    const userName = useSelector(state => state.userName)
     const navigate = useNavigate();
+    const [error, setError] = React.useState('')
 
-    const handleClaimNow = () => {
+    const handleClaimNow = async () => {
         if (isLoggedIn) {
+            try {
+                const response = await axios.post("https://bettingsite-1.onrender.com//add-wallet-amount", { id, newAmount: 100 });
 
-            dispatch(addWalletAmount(100));
-
+                if (response.status === 200) {
+                    console.log("money claimed");
+                    dispatch(addWalletAmount(response.data.walletAmount));
+                } else {
+                    setError("not succesfully claimed");
+                }
+            } catch (err) {
+                console.error("claiming failed:", err);
+                setError(err.response?.data?.message || "An unexpected error occurred.");
+            }
         } else {
             alert('Please log in first to claim the reward.')
             navigate('/login')
