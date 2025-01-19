@@ -30,7 +30,7 @@ const LoginPage = () => {
         setError(null); // Reset error state
 
         try {
-            const response = await axios.post("https://bettingsite-six.vercel.app/loginAuth", {
+            const response = await axios.post("https://bettingsite-1.onrender.com/loginAuth", {
                 userName,
                 password,
             });

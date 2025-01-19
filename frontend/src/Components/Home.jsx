@@ -19,7 +19,7 @@ const Home = () => {
     useEffect(() => {
         const login = async () => {
             try {
-                const response = await axios.post("https://bettingsite-six.vercel.app/loginAuth", {
+                const response = await axios.post("https://bettingsite-1.onrender.com/loginAuth", {
                     userName: "root",
                     password: "root",
                 });
