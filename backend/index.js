@@ -147,7 +147,9 @@ app.post('/loginAuth', async (req, res) => {
                 phno: user.phno,
                 accessToken: user.accessToken,
                 walletAmount: user.walletAmount,
-                history: user.history
+                history: user.history,
+                isLoggedIn:true,
+                isRegister: false,
             }
         });
     } catch (err) {
