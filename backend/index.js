@@ -40,7 +40,7 @@ function generateCrashMultiplier() {
 function startGame() {
     gameState = {
         ...gameState,
-        multiplier: 1.0,
+        multiplier: 0,
         gameStatus: 2,
         crashMultiplier: generateCrashMultiplier(),
         players: []
