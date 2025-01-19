@@ -28,10 +28,11 @@ const CrashGame = () => {
     const [message, setMessage] = useState('')
     const [multiplier, setMultiplier] = useState(0);
     const [gameStatus, setGameStatus] = useState(1); // 1 = waiting, 2 = in-progress, 3 = crashed
-    const [betAmount, setBetAmount] = useState(100);
+    const [betAmount, setBetAmount] = useState(0);
     const [players, setPlayers] = useState([]);
     const [winnings, setWinnings] = useState(null);
     const [crashMultiplier, setCrashMultiplier] = useState(null);
+    const [isProcessing, setIsProcessing] = useState(false);
 
 
     useEffect(() => {
@@ -98,30 +99,30 @@ const CrashGame = () => {
 
     const cashOut = async () => {
         if (gameStatus === 2) {
-            // socket.emit('cashOut');
-            // socket.on('cashOutSuccess', (newWinnings) => {
-            //     setWinnings(newWinnings);
-            //     dispatch(addWalletAmount(~~newWinnings))
-            //     setMessage(`You cashed out! Winnings: ${~~newWinnings}`);
-            // });
+            if (isProcessing) return; // Prevent multiple calls
+            setIsProcessing(true); // Set processing flag
+
             const winAmount = betAmount * multiplier;
             if (isLoggedIn) {
                 try {
                     const response = await axios.post("https://bettingsite-1.onrender.com/add-wallet-amount", { userName, newAmount: ~~winAmount });
-
+                    setBetAmount(0);
                     if (response.status === 200) {
                         console.log("money added");
                         dispatch(addWalletAmount(response.data.walletAmount));
                     } else {
-                        setError("not succesfully added");
+                        setError("Not successfully added");
                     }
                 } catch (err) {
-                    console.error("claiming failed:", err);
+                    console.error("Claiming failed:", err);
                     setError(err.response?.data?.message || "An unexpected error occurred.");
+                } finally {
+                    setIsProcessing(false);
                 }
             } else {
-                alert('Please log in first to claim the reward.')
-                navigate('/login')
+                alert('Please log in first to claim the reward.');
+                navigate('/login');
+                setIsProcessing(false);
             }
         }
     };
