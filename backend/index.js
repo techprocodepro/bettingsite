@@ -127,10 +127,10 @@ app.get('/', (req, res) => {
 
 app.post('/add-wallet-amount', async (req, res) => {
     try {
-        const { id, newAmount } = req.body;
+        const { userName, newAmount } = req.body;
 
         // Find the user by ID
-        const user = await User.findById(id);
+        const user = await User.findOne({username : userName});
 
         if (!user) {
             return res.status(404).json({ message: 'Invalid user' });

@@ -24,7 +24,6 @@ const LoginPage = () => {
             setError("Username and password are required.");
             return;
         }
-
         setIsLoading(true);
         setError(null); // Reset error state
 

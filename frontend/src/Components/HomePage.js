@@ -15,7 +15,6 @@ const HomePage = () => {
 
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(state => state.isLoggedIn)
-    const id = useSelector(state => state.id)
     const userName = useSelector(state => state.userName)
     const navigate = useNavigate();
     const [error, setError] = React.useState('')
@@ -23,7 +22,7 @@ const HomePage = () => {
     const handleClaimNow = async () => {
         if (isLoggedIn) {
             try {
-                const response = await axios.post("https://bettingsite-1.onrender.com//add-wallet-amount", { id, newAmount: 100 });
+                const response = await axios.post("https://bettingsite-1.onrender.com/add-wallet-amount", { userName, newAmount: 100 });
 
                 if (response.status === 200) {
                     console.log("money claimed");
