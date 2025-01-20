@@ -62,7 +62,7 @@ const Home = () => {
                 <center>
                     <Wallet />
                 </center>
-                <div style={{ backgroundColor: "#191919", display: "flex", justifyContent: "center", alignItems: "center", marginRight: "70px", width: "80px", height: "50px", borderRadius: "10px" }}><h3 style={{ color: "gold" }}> {isLoggedIn ? "logout" : "login"}</h3></div>
+                <div style={{ backgroundColor: "#191919", display: "flex", justifyContent: "center", alignItems: "center", marginRight: "70px", width: "100px", height: "50px", borderRadius: "10px" }}><h3 style={{ color: "gold" }}> {isLoggedIn ? "Logged in" : ""}</h3></div>
             </header>
             <div style={{ display: "flex" }}>
 
