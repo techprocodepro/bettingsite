@@ -58,9 +58,11 @@ const Home = () => {
     return (
         <div className='home'>
             <header className='head'>
+                <div><h2 style={{ color: "gold", marginLeft: "70px", flex: 1 }}>BET APP</h2></div>
                 <center>
                     <Wallet />
                 </center>
+                <div style={{ backgroundColor: "#191919", display: "flex", justifyContent: "center", alignItems: "center", marginRight: "70px", width: "80px", height: "50px", borderRadius: "10px" }}><h3 style={{ color: "gold" }}> {isLoggedIn ? "logout" : "login"}</h3></div>
             </header>
             <div style={{ display: "flex" }}>
 

@@ -54,7 +54,6 @@ const HomePage = () => {
                     <Link to="/login" onClick={() => { dispatch(setRegister(false)) }} style={{ width: "100px", height: "40px", backgroundColor: "gold", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", borderRadius: "5px", fontWeight: "700", color: "" }}>login</Link>
                 </div>}
             </div>
-
             <div style={{ display: "flex", margin: "20px 0px 10px 0px", }}>
                 <div className="ad">
                     <div className="ad-btn">
