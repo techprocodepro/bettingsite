@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import profile from '../Assets/profile.jpg'
 import GamesListContainer from './GamesListContainer';
 import axios from 'axios'
+import "../Styles/Container.css"
 
 
 
