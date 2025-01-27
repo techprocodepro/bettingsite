@@ -57,7 +57,7 @@ const HomePage = () => {
             </div>
             <div style={{ display: "flex", margin: "20px 0px 10px 0px", }}>
                 <div className="ad">
-                    <div className="ad-btn">
+                    <div className="ads-btn">
                         <div style={{ display: "flex" }}>
                             <h3 style={{ fontSize: "18px", color: "white" }}>Get&nbsp;</h3>
                             <h3 style={{ fontSize: "24px", color: "#fec195" }}>100&nbsp;</h3>
