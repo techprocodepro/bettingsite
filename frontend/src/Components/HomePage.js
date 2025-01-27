@@ -75,7 +75,7 @@ const HomePage = () => {
                     </div>
                 </div>
                 <div className="ad nd">
-                    <div className="ad-btn">
+                    <div className="ads-btn">
                         <div style={{ display: "flex" }}>
                             <h3 style={{ fontSize: "18px", color: "white" }}>Get&nbsp;</h3>
                             <h3 style={{ fontSize: "24px", color: "#463e7a" }}>100&nbsp;</h3>
