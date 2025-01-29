@@ -62,7 +62,7 @@ const Home = () => {
                 <center>
                     <Wallet />
                 </center>
-                <div onClick={login} style={{ backgroundColor: "#191919", display: "flex", justifyContent: "center", alignItems: "center", marginRight: "70px", width: "100px", height: "50px", borderRadius: "10px" }}><h3 style={{ color: "gold" }}> {isLoggedIn ? "Logged in" : "Fake login"}</h3></div>
+                <div onClick={login} style={{ backgroundColor: "#191919", display: "flex", justifyContent: "center", alignItems: "center", marginRight: "70px", width: "100px", height: "50px", borderRadius: "10px", cursor:"pointer" }}><h3 style={{ color: "gold" }}> {isLoggedIn ? "Logged in" : "Fake login"}</h3></div>
             </header>
             <div style={{ display: "flex" }}>
 
