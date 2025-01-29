@@ -107,6 +107,7 @@ const CrashGame = () => {
                 try {
                     const response = await axios.post("https://bettingsite-1.onrender.com/add-wallet-amount", { userName, newAmount: ~~winAmount });
                     setBetAmount(0);
+                    setMessage(`won Amount ${~~winAmount}`)
                     if (response.status === 200) {
                         console.log("money added");
                         dispatch(addWalletAmount(response.data.walletAmount));
