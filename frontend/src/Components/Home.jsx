@@ -17,26 +17,26 @@ const Home = () => {
     const session = localStorage.getItem("accessToken"); // fix later => use this to make api call to get user data
     const isLoggedIn = useSelector(state => state.isLoggedIn)
 
-    useEffect(() => {
-        const login = async () => {
-            try {
-                const response = await axios.post("https://bettingsite-1.onrender.com/loginAuth", {
-                    userName: "groot",
-                    password: "groot",
-                });
+    const login = async () => {
+        try {
+            const response = await axios.post("https://bettingsite-1.onrender.com/loginAuth", {
+                userName: "groot",
+                password: "groot",
+            });
 
-                if (response.status === 200) {
-                    console.log("Login successful:", response.data.user);
-                    dispatch(fetchUserData(response.data.user));
-                    localStorage.setItem("accessToken", response.data.user.accessToken);
-                } else {
-                    console.log("Login failed. Please try again.");
-                }
-            } catch (err) {
-                console.error("Login failed:", err);
-
+            if (response.status === 200) {
+                console.log("Login successful:", response.data.user);
+                dispatch(fetchUserData(response.data.user));
+                localStorage.setItem("accessToken", response.data.user.accessToken);
+            } else {
+                console.log("Login failed. Please try again.");
             }
-        };
+        } catch (err) {
+            console.error("Login failed:", err);
+
+        }
+    }
+    useEffect(() => {
         if (session) {
             login();
         }
@@ -62,7 +62,7 @@ const Home = () => {
                 <center>
                     <Wallet />
                 </center>
-                <div style={{ backgroundColor: "#191919", display: "flex", justifyContent: "center", alignItems: "center", marginRight: "70px", width: "100px", height: "50px", borderRadius: "10px" }}><h3 style={{ color: "gold" }}> {isLoggedIn ? "Logged in" : ""}</h3></div>
+                <div onClick={login} style={{ backgroundColor: "#191919", display: "flex", justifyContent: "center", alignItems: "center", marginRight: "70px", width: "100px", height: "50px", borderRadius: "10px" }}><h3 style={{ color: "gold" }}> {isLoggedIn ? "Logged in" : "Fake login"}</h3></div>
             </header>
             <div style={{ display: "flex" }}>
 
