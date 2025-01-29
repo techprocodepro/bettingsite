@@ -28,7 +28,7 @@ const CrashGame = () => {
     const [message, setMessage] = useState('')
     const [multiplier, setMultiplier] = useState(0);
     const [gameStatus, setGameStatus] = useState(1); // 1 = waiting, 2 = in-progress, 3 = crashed
-    const [betAmount, setBetAmount] = useState(0);
+    const [betAmount, setBetAmount] = useState(100);
     const [players, setPlayers] = useState([]);
     const [winnings, setWinnings] = useState(null);
     const [crashMultiplier, setCrashMultiplier] = useState(null);
