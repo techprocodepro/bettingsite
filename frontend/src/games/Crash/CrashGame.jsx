@@ -19,11 +19,7 @@ const CrashGame = () => {
     const [error, setError] = useState('')
 
 
-    // const [progress, setProgress] = useState(0);
-    // const [isCrashed, setIsCrashed] = useState(false);
-    // const [isBetStarted, setIsBetStarted] = useState(false)
-    // const name = useSelector(state => state.userName)
-    // var interval;
+
 
     const [message, setMessage] = useState('')
     const [multiplier, setMultiplier] = useState(0);
@@ -99,8 +95,8 @@ const CrashGame = () => {
 
     const cashOut = async () => {
         if (gameStatus === 2) {
-            if (isProcessing) return; // Prevent multiple calls
-            setIsProcessing(true); // Set processing flag
+            if (isProcessing) return; // to prevent multiple cashout
+            setIsProcessing(true); 
 
             const winAmount = betAmount * multiplier;
             if (isLoggedIn) {
@@ -173,48 +169,3 @@ const CrashGame = () => {
 
 export default CrashGame
 
-// const PlaceBet = () => {
-
-//     if (isCrashed) {
-//         setIsCrashed(false)
-//         setProgress(0)
-//         setIsBetStarted(false)
-//     }
-//     else if (walletAmount >= betAmount) {
-
-//         if (betAmount !== 0) {
-//             dispatch(deductWalletAmount(betAmount))
-
-//             var crashTime = Math.random() * 9000;
-
-//             setIsBetStarted(true);
-
-//             if (!isCrashed) {
-//                 interval = setInterval(() => {
-//                     setProgress((prev) => Math.min(prev + 0.05, 10));
-//                 }, 50);
-
-//                 setTimeout(() => {
-//                     setIsCrashed(true);
-//                     clearInterval(interval);
-//                 }, crashTime);
-//             }
-
-//             return () => clearInterval(interval);
-//         }
-//         else {
-//             alert('Bet Amount Cannot Be 0')
-//         }
-//     } else {
-//         alert('Insufficient wallet balance!');
-//     }
-// }
-
-// const CheckOut = () => {
-//     if (!isCrashed) {
-//         dispatch(addWalletAmount(~~(progress * betAmount)))
-//         console.log(~~(progress * betAmount))
-//         setBetAmount(0)
-//         setIsCrashed(false)
-//     }
-// }

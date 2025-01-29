@@ -25,7 +25,7 @@ const LoginPage = () => {
             return;
         }
         setIsLoading(true);
-        setError(null); // Reset error state
+        setError(null);
 
         try {
             const response = await axios.post("https://bettingsite-1.onrender.com/loginAuth", {
@@ -57,8 +57,8 @@ const LoginPage = () => {
         flexDirection: "column",
         borderRadius: "20px",
         maxWidth: "100%",
-        backgroundColor: "#191939", // Changed to dark color
-        color: "#463e7a", // Text color adjusted for contrast
+        backgroundColor: "#191939", 
+        color: "#463e7a", 
         flex: 1,
         height: "100%"
     };
@@ -70,8 +70,8 @@ const LoginPage = () => {
         borderRadius: "4px",
         fontWeight: "400",
         border: "1px solid #463e7a",
-        backgroundColor: "#2c2852", // Dark background for inputs
-        color: "#665e9a", // White text for visibility
+        backgroundColor: "#2c2852", 
+        color: "#665e9a", 
     };
 
     const buttonStyle = {
